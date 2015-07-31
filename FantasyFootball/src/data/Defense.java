@@ -30,6 +30,16 @@ public class Defense implements Serializable{
 		return wrStats.get(key);
 	}
 	
+	/**
+	 * Returns a hashmap of the average points allowed to 
+	 * each position throughout the season with the keys being
+	 * "TeamName+Position"
+	 * 
+	 * @param defenses - ArrayList of all the defenses
+	 * @param scoring - League scoring preferences
+	 * @return defensePoints - Returns a hashmap of the average points allowed to 
+	 * each position throughout the season
+	 */
 	public static HashMap<String, Double> calculateDefensePoints(ArrayList<Defense> defenses, ScoringPreferences scoring) {
 		HashMap<String, Double> defensePoints = new HashMap<String, Double>();
 		

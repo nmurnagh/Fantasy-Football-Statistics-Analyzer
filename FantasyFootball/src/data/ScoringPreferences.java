@@ -102,6 +102,7 @@ public class ScoringPreferences {
 		this.fumbles = fumbles;
 	}
 	
+	//Initial scoring preferences based on default league
 	public ScoringPreferences() {
 		passingAtt = 0;
 		passingComp = 0;

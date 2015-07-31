@@ -1,4 +1,4 @@
-package gui;
+package gui.Listeners;
 
 public interface ScoringListener {
 	public void scoringSet(double pa, double pc, double ip, double py,

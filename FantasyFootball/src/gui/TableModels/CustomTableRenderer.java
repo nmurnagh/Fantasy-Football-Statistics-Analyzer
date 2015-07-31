@@ -1,4 +1,4 @@
-package gui;
+package gui.TableModels;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -9,6 +9,9 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
+/**
+ * Custom Renderer for the tables
+ */
 public class CustomTableRenderer extends DefaultTableCellRenderer {
 
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
@@ -20,9 +23,9 @@ public class CustomTableRenderer extends DefaultTableCellRenderer {
 		} else {
 			c.setBackground(new Color(220,220,220));
 		}
-		if(column != 1) {
-			((JLabel) c).setHorizontalAlignment(SwingConstants.CENTER);
-		}
+		
+		((JLabel) c).setHorizontalAlignment(SwingConstants.CENTER);
+	
 
 		return c;
 	}

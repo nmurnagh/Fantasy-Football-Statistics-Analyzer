@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class Player implements Serializable, Comparable<Player> {
+public class Player implements Serializable {
 
 	private static final long serialVersionUID = 6119864773800200976L;
 	
@@ -28,6 +28,9 @@ public class Player implements Serializable, Comparable<Player> {
 	public int getStats(String key) {
 		return stats.get(key);
 	}
+	public HashMap<String, Integer> getStats() {
+		return stats;
+	}
 	public String getOpponents(int idx) {
 		return opponents[idx];
 	}
@@ -43,6 +46,14 @@ public class Player implements Serializable, Comparable<Player> {
 	public void setSituationalPoints(int idx, double points) {
 		this.situationalPoints[idx] = points;
 	}
+	
+	/**
+	 * Calculates the fantasy points from the stats and scoring preferences
+	 * Also compares the fantasy points to the average allowed by the defense to that position 
+	 * 
+	 * @param scoringprefs - Scoring preferences specified by the user
+	 * @param defensePoints - Defensive averages used for situtational stats
+	 */
 	
 	public void calculateFantasyPoints(ScoringPreferences scoringprefs, HashMap<String, Double> defensePoints) {
 		
@@ -73,15 +84,5 @@ public class Player implements Serializable, Comparable<Player> {
 			
 		}
 		
-	}
-	
-	public int compareTo(Player o) {
-		if (this.getSituationalPoints(17) == o.getSituationalPoints(17)) {
-			return 0;
-		} else if (this.getSituationalPoints(17) < o.getSituationalPoints(17)) {
-			return 1;
-		} else {
-			return -1;
-		}
 	}
 }

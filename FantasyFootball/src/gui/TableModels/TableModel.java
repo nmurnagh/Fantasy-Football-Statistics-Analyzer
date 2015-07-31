@@ -1,4 +1,4 @@
-package gui;
+package gui.TableModels;
 
 import java.util.ArrayList;
 
@@ -6,6 +6,12 @@ import javax.swing.table.AbstractTableModel;
 
 import data.Player;
 
+/**
+ * Parent Class for all the table models contained in the tabs
+ * 
+ * @author Nathan Murnaghan
+ *
+ */
 public class TableModel extends AbstractTableModel {
 	
 	protected ArrayList<Player> playerList;
@@ -26,4 +32,9 @@ public class TableModel extends AbstractTableModel {
 	public void setData(ArrayList<Player> playerList) {
 		//To be overridden in child classes
 	}
+	
+	public Player getPlayer(int row) {
+		return playerList.get(row);
+	}
+
 }

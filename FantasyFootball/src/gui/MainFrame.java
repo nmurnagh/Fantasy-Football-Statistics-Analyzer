@@ -1,5 +1,9 @@
 package gui;
 
+import gui.Dialogs.ScoringDialog;
+import gui.Listeners.FilterListener;
+import gui.Listeners.ScoringListener;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -14,6 +18,12 @@ import javax.swing.JTabbedPane;
 
 import controller.MainApplication;
 
+/**
+ * The Main Frame of the application
+ * 
+ * @author Nathan Murnaghan
+ *
+ */
 public class MainFrame extends JFrame {
 
 	private MainApplication mainApplication;
@@ -31,11 +41,11 @@ public class MainFrame extends JFrame {
 		//Initialization of Components
 		mainApplication = new MainApplication();
 		scoringDialog = new ScoringDialog(this);
-		fantasyPointsTablePanel = new TablePanel(0);
-		qbSituationalPointsTablePanel = new TablePanel(1);
-		rbSituationalPointsTablePanel = new TablePanel(1);
-		wrSituationalPointsTablePanel = new TablePanel(1);
-		teSituationalPointsTablePanel = new TablePanel(1);
+		fantasyPointsTablePanel = new TablePanel(0,this);
+		qbSituationalPointsTablePanel = new TablePanel(1,this);
+		rbSituationalPointsTablePanel = new TablePanel(1,this);
+		wrSituationalPointsTablePanel = new TablePanel(1,this);
+		teSituationalPointsTablePanel = new TablePanel(1,this);
 		setJMenuBar(createMenuBar());
 		tabPane = new JTabbedPane();
 		
@@ -82,7 +92,11 @@ public class MainFrame extends JFrame {
 		setVisible(true);
 		add(tabPane, BorderLayout.CENTER);
 	}
-
+	
+	/**
+	 * 
+	 * @return menuBar - returns the menubar for the main frame
+	 */
 	public JMenuBar createMenuBar() {
 
 		JMenuBar menuBar = new JMenuBar();
@@ -101,7 +115,6 @@ public class MainFrame extends JFrame {
 		menuBar.add(prefMenu);
 
 		// ActionListensers for MenuBar
-
 		exitItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				int action = JOptionPane.showConfirmDialog(MainFrame.this,
@@ -123,4 +136,5 @@ public class MainFrame extends JFrame {
 
 		return menuBar;
 	}
+	
 }

@@ -1,4 +1,6 @@
-package gui;
+package gui.Dialogs;
+
+import gui.Listeners.ScoringListener;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -13,6 +15,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+/**
+ * Creates dialog that allows user to modify scoring peferences
+ * 
+ * @author Nathan Murnaghan
+ *
+ */
 public class ScoringDialog extends JDialog {
 
 	private JButton saveButton;
@@ -36,10 +44,12 @@ public class ScoringDialog extends JDialog {
 	public ScoringDialog(JFrame parent) {
 		super(parent, "Scoring Preferences", false);
 
+		//Formatting
 		setLayout(new GridBagLayout());
 		setMinimumSize(new Dimension(400, 800));
 		setLocationRelativeTo(parent);
-
+		
+		//Layout
 		GridBagConstraints gc = new GridBagConstraints();
 
 		gc.gridy = 0;
@@ -303,6 +313,7 @@ public class ScoringDialog extends JDialog {
 
 	}
 
+	//Gets the current scoring preferences to be displayed on open
 	public void setDefaults(double pa, double pc, double ip, double py,
 			double pt, double in, double sc, double ra, double ry,
 			double rt, double rec, double recy, double rect, double fum) {
@@ -324,6 +335,7 @@ public class ScoringDialog extends JDialog {
 		
 	}
 	
+	//Sets Listener
 	public void setScoringListener(ScoringListener scoringListener) {
 		this.scoringListener = scoringListener;
 	}

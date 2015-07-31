@@ -1,7 +1,7 @@
 package controller;
 
 import gui.MainFrame;
-import gui.ScoringDialog;
+import gui.Dialogs.ScoringDialog;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,7 +45,8 @@ public class MainApplication {
 		
 		
 	}
-
+	
+	//Sets the values shown in the scoring dialog
 	public void setScoringValues(ScoringDialog scoringDialog) {
 		scoringDialog.setDefaults(scoring.getPassingAtt(),
 				scoring.getPassingComp(), scoring.getIncompPass(),
@@ -55,7 +56,8 @@ public class MainApplication {
 				scoring.getReceptions(), scoring.getReceivingYards(),
 				scoring.getReceivingTD(), scoring.getFumbles());
 	}
-
+	
+	//Saves any changes made to scoring preferences by user
 	public void setScoringPreferences(double pa, double pc, double ip,
 			double py, double pt, double in, double sc, double ra, double ry,
 			double rt, double rec, double recy, double rect, double fum) {
@@ -74,16 +76,27 @@ public class MainApplication {
 		scoring.setReceivingTD(rect);
 		scoring.setFumbles(fum);
 		
+		//Updates the fantasy points
 		for (Player player: playerList) {
 			player.calculateFantasyPoints(scoring, Defense.calculateDefensePoints(defenseList, scoring));
 		}
-		
 		for (int i=1;i<5;i++) {
 			DataHandling.normalizeSituationalStats(DataHandling.positionFilter(playerList, i));
 		}
 	}
 	
+	//Returns playerList
 	public ArrayList<Player> getPlayers(int idx) {
 		return DataHandling.positionFilter(playerList, idx);
+	}
+	
+	//Returns specific player
+	public Player getPlayer() {
+		return playerList.get(0);
+	}
+
+	//Returns defense statistics
+	public HashMap<String, Double> getDefense() {
+		return Defense.calculateDefensePoints(defenseList, scoring);
 	}
 }

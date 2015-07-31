@@ -5,8 +5,20 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class DataHandling {
+/**
+ * DataHandling --- Handles data manipulation
+ * 
+ * @author Nathan Murnaghan
+ */
 
+public class DataHandling {
+	
+	/**
+	 * Loads player data from file
+	 * 
+	 * @return ArrayList playerList containing all of the player objects
+	 */
+	
 	public static ArrayList<Player> loadPlayers() {
 		ArrayList<Player> playerList = new ArrayList<Player>();
 		
@@ -31,6 +43,12 @@ public class DataHandling {
 		
 	}
 	
+	/**
+	 * Loads defense data from file
+	 * 
+	 * @return ArrayList defenseList containing all of the defense objects
+	 */
+	
 	public static ArrayList<Defense> loadDefenses() {
 		ArrayList<Defense> defenseList = new ArrayList<Defense>();
 		
@@ -53,11 +71,18 @@ public class DataHandling {
 		
 	}
 	
+	/**
+	 * Normalizes the situational stats between 0 and 100
+	 * 
+	 * @param players - List of each of the player objects
+	 */
+	
 	public static void normalizeSituationalStats(ArrayList<Player> players) {
 		
 		double min = 0.0;
 		double max = 0.0;
 		
+		//Gets the max and min
 		for (Player player: players) {
 			for (int i=0;i<17;i++) {
 				if (player.getSituationalPoints(i) > max) {
@@ -68,6 +93,7 @@ public class DataHandling {
 			}
 		}
 		
+		//Normalization of only the games the player participated in
 		for (Player player: players) {
 			double count = 0.0;
 			for (int i=0;i<17;i++) {
@@ -86,6 +112,13 @@ public class DataHandling {
 		
 		
 	}
+	
+	/**
+	 * 
+	 * @param playerList - List of all the player objects
+	 * @param idx - index used to specify which position is requested
+	 * @return filteredList - An ArrayList filtered by the specified position
+	 */
 	
 	public static ArrayList<Player> positionFilter(ArrayList<Player> playerList, int idx) {
 		ArrayList<Player> filteredList = new ArrayList<Player>();

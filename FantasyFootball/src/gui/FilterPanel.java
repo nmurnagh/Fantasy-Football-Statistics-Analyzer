@@ -1,5 +1,7 @@
 package gui;
 
+import gui.Listeners.FilterListener;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -11,6 +13,13 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
+
+/**
+ * The panel containing the filtering options on the fantasy points tab
+ * 
+ * @author Nathan Murnaghan
+ *
+ */
 
 public class FilterPanel extends JPanel {
 	
@@ -24,6 +33,7 @@ public class FilterPanel extends JPanel {
 
 	public FilterPanel() {
 		
+		//Formatting Panel
 		Dimension dim = getPreferredSize();
 		dim.height = 100;
 		setPreferredSize(dim);
@@ -32,6 +42,7 @@ public class FilterPanel extends JPanel {
 		Border outerBorder = BorderFactory.createEmptyBorder(5,5,5,5);
 		setBorder(BorderFactory.createCompoundBorder(outerBorder, innerBorder));
 		
+		//Layout of Panel
 		setLayout(new GridBagLayout());
 		
 		GridBagConstraints gc = new GridBagConstraints();
@@ -51,6 +62,7 @@ public class FilterPanel extends JPanel {
 		gc.gridx++;
 		add(teBtn = new JButton("Tight Ends"),gc);
 		
+		//Listener for the buttons
 		buttonClick = new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				
@@ -82,6 +94,7 @@ public class FilterPanel extends JPanel {
 		
 	}
 	
+	//Sets the Listener
 	public void setFilterListener(FilterListener filterListener) {
 		this.filterListener = filterListener;
 	}
