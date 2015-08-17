@@ -59,7 +59,7 @@ public class TablePanel extends JTable {
 		
 		
 		//Formatting the Table
-		for(int i=0; i<22;i++) {
+		for(int i=0; i<24;i++) {
 			table.getColumnModel().getColumn(i).setCellRenderer(new CustomTableRenderer());
 		}
 		
@@ -69,7 +69,7 @@ public class TablePanel extends JTable {
 		TableColumn column = table.getColumnModel().getColumn(0);
 		column.setPreferredWidth(50);
 		TableColumn column1 = table.getColumnModel().getColumn(1);
-		column1.setPreferredWidth(150);
+		column1.setPreferredWidth(175);
 		table.getTableHeader().setFont(new Font("Arial",Font.PLAIN,15));
 		
 		//Listener for back click on table to launch popup
@@ -81,7 +81,7 @@ public class TablePanel extends JTable {
 				table.setColumnSelectionInterval(col,col);
 				table.setRowSelectionInterval(row,row);
 
-				if(e.getButton() == MouseEvent.BUTTON3 && col == 1) {
+				if(e.getButton() == MouseEvent.BUTTON3 || e.getButton() == MouseEvent.BUTTON1 && col == 1) {
 					popup.show(table, e.getX(), e.getY());
 				}
 			}
@@ -92,7 +92,6 @@ public class TablePanel extends JTable {
 			public void actionPerformed(ActionEvent arg0) {
 				int row = table.getSelectedRow();
 				PlayerDialog test = new PlayerDialog(mainFrame,tableModel.getPlayer(row));
-				//test.setData(tableModel.getPlayer(row));
 			}
 		});
 	}

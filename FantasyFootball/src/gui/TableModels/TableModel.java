@@ -17,7 +17,7 @@ public class TableModel extends AbstractTableModel {
 	protected ArrayList<Player> playerList;
 
 	public int getColumnCount() {
-		return 22;
+		return 24;
 	}
 
 	public int getRowCount() {

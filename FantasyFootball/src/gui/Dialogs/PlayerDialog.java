@@ -3,7 +3,7 @@ package gui.Dialogs;
 import gui.TableModels.CustomTableRenderer;
 import gui.TableModels.PlayerDialogTableModel;
 
-import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -21,12 +21,12 @@ import javax.swing.table.TableColumn;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.CategoryLabelPositions;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
-import org.jfree.data.xy.XYDataset;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
+import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.chart.renderer.category.StandardBarPainter;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 import controller.MainApplication;
 import data.Player;
@@ -53,7 +53,7 @@ public class PlayerDialog extends JDialog {
 		mainApplication = new MainApplication();
 		
 		//Formatting
-		setSize(new Dimension(1200,600));
+		setSize(new Dimension(1400,700));
 		setResizable(false);
 		setLocationRelativeTo(parent);
 		setVisible(true);
@@ -94,48 +94,49 @@ public class PlayerDialog extends JDialog {
 		//////////////Next Row/////////////////////
 		gc.gridy++;
 		add(tablePane = new JScrollPane(table),gc);
-		tablePane.setPreferredSize(new Dimension(1100,50));
+		tablePane.setPreferredSize(new Dimension(1350,50));
 		
 		//////////////Next Row/////////////////////
 		gc.gridy++;
 		gc.insets = new Insets(0, 30, 10, 0);
 		//Creation of Chart
-		JFreeChart xylineChart = ChartFactory.createXYLineChart(
+		JFreeChart barChart = ChartFactory.createBarChart(
 		         "Points Scored Compared to Average Points Allowed by Defense" ,
 		         "Week" ,
 		         "Points" ,
 		         createDataset(player) ,
 		         PlotOrientation.VERTICAL ,
 		         true , true , false);
-		add(playerChart = new ChartPanel(xylineChart),gc);
-		final XYPlot plot = xylineChart.getXYPlot();
-		XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
-		renderer.setSeriesStroke(0,new BasicStroke(1.0f));
-		plot.setRenderer(renderer);
-		playerChart.setPreferredSize(new Dimension(1100,400));
+		final CategoryAxis domainAxis = barChart.getCategoryPlot().getDomainAxis();
+        domainAxis.setMaximumCategoryLabelLines(2);
+        
+        final BarRenderer renderer = (BarRenderer) barChart.getCategoryPlot().getRenderer();
+        renderer.setItemMargin(0.0f);
+        renderer.setBarPainter(new StandardBarPainter());
+
+		add(playerChart = new ChartPanel(barChart),gc);
+		playerChart.setPreferredSize(new Dimension(1350,500));
 
 	}
 	
 	//Creates the dataset for the chart
-	private XYDataset createDataset(Player player) {
-		final XYSeries fantasyseries = new XYSeries("Fantasy Points");
-		final XYSeries defenseseries = new XYSeries("Avg Defense Points Allowed");
+	private DefaultCategoryDataset createDataset(Player player) {
+		final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		final String series1 = "Fantasy Points";
+		final String series2 = "Avg Defense Points Allowed";
 		
 		HashMap<String, Double> defensePoints = mainApplication.getDefense();
 		
 		for (int i=0;i<17;i++) {
-			fantasyseries.add(i+1,player.getFantasyPoints(i));
 			if(defensePoints.get(player.getOpponents(i)+player.getPosition()) != null) {
-				defenseseries.add(i+1,defensePoints.get(player.getOpponents(i)+player.getPosition()));
+				dataset.addValue(player.getFantasyPoints(i), series1, "Wk" + (i+1) + " " + player.getOpponents(i));
+				dataset.addValue(defensePoints.get(player.getOpponents(i)+player.getPosition()), series2, "Wk" + (i+1) + " " + player.getOpponents(i));
 			} else {
-				defenseseries.add(i+1,0);
+				dataset.addValue(0, series1,"Wk" + (i+1) + " N/A");
+				dataset.addValue(0, series2, "Wk" + (i+1) + " N/A");
 			}
 			
 		}
-		
-		final XYSeriesCollection dataset = new XYSeriesCollection();
-		dataset.addSeries(fantasyseries);
-		dataset.addSeries(defenseseries);
 	
 		return dataset;
 	}

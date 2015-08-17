@@ -23,7 +23,7 @@ public class FantasyPointsTableModel extends TableModel {
 		labels = new String[] { "Rank", "Name", "Team", "Position", "Week 1",
 				"Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7",
 				"Week 8", "Week 9", "Week 10", "Week 11", "Week 12", "Week 13",
-				"Week 14", "Week 15", "Week 16", "Week 17", "Total" };
+				"Week 14", "Week 15", "Week 16", "Week 17", "Average", "Std Dev", "Total" };
 	}
 	
 	public String getColumnName(int col) {
@@ -51,9 +51,9 @@ public class FantasyPointsTableModel extends TableModel {
 	public void setData(ArrayList<Player> playerList) {
 		Collections.sort(playerList, new Comparator<Player>() {
 			public int compare(Player p1, Player p2) {
-				if (p1.getFantasyPoints(17) == p2.getFantasyPoints(17)) {
+				if (p1.getFantasyPoints(19) == p2.getFantasyPoints(19)) {
 					return 0;
-				} else if (p1.getFantasyPoints(17) < p2.getFantasyPoints(17)) {
+				} else if (p1.getFantasyPoints(19) < p2.getFantasyPoints(19)) {
 					return 1;
 				} else {
 					return -1;

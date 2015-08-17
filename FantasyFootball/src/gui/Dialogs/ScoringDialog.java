@@ -13,10 +13,11 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
- * Creates dialog that allows user to modify scoring peferences
+ * Creates dialog that allows user to modify scoring preferences
  * 
  * @author Nathan Murnaghan
  *
@@ -281,28 +282,35 @@ public class ScoringDialog extends JDialog {
 		
 		saveButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				double pa = Double.parseDouble(passingAtt.getText());
-				double pc = Double.parseDouble(passingComp.getText());
-				double ip = Double.parseDouble(incompPass.getText());
-				double py = Double.parseDouble(passingYards.getText());
-				double pt = Double.parseDouble(passingTD.getText());
-				double in = Double.parseDouble(ints.getText());
-				double sc = Double.parseDouble(sacks.getText());
-				double ra = Double.parseDouble(rushingAtt.getText());
-				double ry = Double.parseDouble(rushingYards.getText());
-				double rt = Double.parseDouble(rushingTD.getText());
-				double rec = Double.parseDouble(receptions.getText());
-				double recy = Double.parseDouble(receivingYards.getText());
-				double rect = Double.parseDouble(receivingTD.getText());
-				double fum = Double.parseDouble(fumbles.getText());
-				
-				if(scoringListener != null) {
-					scoringListener.scoringSet(pa,pc,ip,py,pt,in,sc,ra,ry,rt,rec,recy,rect,fum);
+				try {
+					double pa = Double.parseDouble(passingAtt.getText());
+					double pc = Double.parseDouble(passingComp.getText());
+					double ip = Double.parseDouble(incompPass.getText());
+					double py = Double.parseDouble(passingYards.getText());
+					double pt = Double.parseDouble(passingTD.getText());
+					double in = Double.parseDouble(ints.getText());
+					double sc = Double.parseDouble(sacks.getText());
+					double ra = Double.parseDouble(rushingAtt.getText());
+					double ry = Double.parseDouble(rushingYards.getText());
+					double rt = Double.parseDouble(rushingTD.getText());
+					double rec = Double.parseDouble(receptions.getText());
+					double recy = Double.parseDouble(receivingYards.getText());
+					double rect = Double.parseDouble(receivingTD.getText());
+					double fum = Double.parseDouble(fumbles.getText());
+					
+					if(scoringListener != null) {
+						scoringListener.scoringSet(pa,pc,ip,py,pt,in,sc,ra,ry,rt,rec,recy,rect,fum);
+					}
+					
+					setVisible(false);
+					
+				} catch (NullPointerException|NumberFormatException e) {
+					JOptionPane.showMessageDialog(saveButton.getParent(),
+						    "All scoring settings boxes must contain numbers",
+						    "Error",
+						    JOptionPane.ERROR_MESSAGE);
 				}
-				
-				setVisible(false);
 			}
-			
 		});
 
 		cancelButton.addActionListener(new ActionListener() {

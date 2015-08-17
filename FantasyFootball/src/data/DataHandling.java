@@ -73,6 +73,7 @@ public class DataHandling {
 	
 	/**
 	 * Normalizes the situational stats between 0 and 100
+	 * Also Calculates Average and Standard Deviation of situational Stats
 	 * 
 	 * @param players - List of each of the player objects
 	 */
@@ -95,22 +96,30 @@ public class DataHandling {
 		
 		//Normalization of only the games the player participated in
 		for (Player player: players) {
+			
 			double count = 0.0;
 			for (int i=0;i<17;i++) {
 				if (Arrays.asList("ERROR 42").contains(player.getOpponents(i))) {	
 				} else {
 					count++;
 					player.setSituationalPoints(i, (player.getSituationalPoints(i)-min)/(max-min)*100);
-					player.setSituationalPoints(17, player.getSituationalPoints(17)+player.getSituationalPoints(i));
+					player.setSituationalPoints(19, player.getSituationalPoints(19)+player.getSituationalPoints(i));
 				}
 			}
+			
 			if (count !=0) {
-				player.setSituationalPoints(17, player.getSituationalPoints(17)/count);
+				player.setSituationalPoints(17, player.getSituationalPoints(19)/count);
 			}
 			
+			double stdCount = 0;
+			for (int i=0;i<17;i++) {
+				if (Arrays.asList("ERROR 42").contains(player.getOpponents(i))) {
+				} else {
+					stdCount += Math.pow(player.getSituationalPoints(i) - player.getSituationalPoints(17),2);
+				}
+			}
+			player.setSituationalPoints(18, Math.sqrt(stdCount/count));
 		}
-		
-		
 	}
 	
 	/**

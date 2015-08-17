@@ -45,7 +45,7 @@ public class PlayerDialogTableModel extends AbstractTableModel {
 	public Object getValueAt(int row, int col) {
 		if (col == 13) {
 			NumberFormat formatter = new DecimalFormat("#0.00");
-			return formatter.format(player.getFantasyPoints(17));
+			return formatter.format(player.getFantasyPoints(19));
 		} else {
 			return totals[col];
 		}
