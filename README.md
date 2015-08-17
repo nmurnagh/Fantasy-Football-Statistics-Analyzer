@@ -1,6 +1,10 @@
 # Fantasy-Football-Statistics-Analyzer
-This program was created to analyze fantasy football statistics. It calculates fantasy points from the base stats so a user can modify the scoring settings for custom leagues. It also calculates situational statistics for each of the positions. This statistic compares how well the player preformed against the defense by comparing the points scored to the average points allowed to the position by the defense. Additional information about and individual player can be accessed by right clicking on a players name in the table and selected addtional information. 
+This program was created to analyze fantasy football statistics from the previous season.  It fully supports custom league scoring settings, the scoring settings can be modified through the preferences toolbar and opening the scoring dialog. All values in the program update upon saving the scoring preferences. 
 
-Upcoming updates will add:
-- Average and standard deviation for fantasy points per week for each of the players
-- Ability to save scoring preferences
+The first tab is the fantasy points broken down by week, at the end is the total, average and standard deviation for the season. The average only includes the games in which the player participated in. 
+
+The remaining situtational points tabs are seperated by position. The situational stats are a metric the compares how well the player performed against the defense. It is a rating between 0-100 that compares their preformance that week to the average amount of points the defense allowed to that position over the season. 
+
+Additional information about individual players can be accessed by clicking on the players name and selecting additional information. This will open a dialog that contains their season statistics as well as a bar graph comparing fantasy points scored to the average amount allowed by the defense for each week of the season. 
+
+
